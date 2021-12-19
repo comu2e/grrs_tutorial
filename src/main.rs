@@ -37,6 +37,15 @@ fn main() {
     //引数が正しいか確認してみる。
     print!("{}",args.pattern);
     print!("{:?}",args.path);
+    
+    //read_to_stringはstringを返さない代わりに、Resultオブジェクトを返す。
+    //Resultは今回であればStringか、std::io::Error型を返す。
+    // matchを使うことで対応できる。
+    let result = std::fs::read_to_string("test.txt");
+    match result {
+        Ok(content) => {print!("File content: {}",content);}
+        Err(error) => {print!("Oh no:{}",error);}
+    }
 }
 
 /*
