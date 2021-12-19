@@ -33,9 +33,18 @@ fn main() {
       */
 
     let args = Cli::from_args();
+    // Exercide for the reader:
+    //引数が正しいか確認してみる。
     print!("{}",args.pattern);
     print!("{:?}",args.path);
 }
+
+/*
+  deriveすることでmain内に
+  std::env::nth(..)を定義してCli構造体に渡す必要な無くなって便利
+  let args = Cli::from_args()だけでよいはず。
+  他の引数もどんどん追加しても簡素に書けるので便利。 
+ */
 #[derive(StructOpt)]
 struct Cli {
   pattern: String,
