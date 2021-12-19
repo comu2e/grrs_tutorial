@@ -11,26 +11,35 @@
  * 
  * 
 ***/
+
+
+use structopt::StructOpt;
+
 fn main() {
     // CLI引数を取得
-    let pattern = std::env::args().nth(1).expect("no pattern give");
-    let path = std::env::args().nth(2).expect("no path given");
-    // Cli構造体に値を設定
+     // Cli構造体に値を設定
     /*
      * これだけでも動作するが使いにくい。
      * --pattern="foo" or --pattern "foo"に対応できない
      * $ cargo run pattern=1 test
      * >> pattern=1+1
      */
-    let args = Cli{
-      pattern:pattern,
-      path:std::path::PathBuf::from(path),
-    };
-    println!("{}+1",args.pattern);
-}
+    
+     /* sturctoptライブラリを使用する。
+     *sturctopt=0.3.13 をCargo.tomlに記載
+     * use structopt::StructOpt
+     * #[derive(StructOpt)]をstruct Cli上に記載
+     * これでCli構造体はStructOptを継承(Derive)する。
+      */
 
+    let args = Cli::from_args();
+    print!("{}",args.pattern);
+    print!("{:?}",args.path);
+}
+#[derive(StructOpt)]
 struct Cli {
   pattern: String,
+  #[structopt(parse(from_os_str))]
   path : std::path::PathBuf,
 }
 
