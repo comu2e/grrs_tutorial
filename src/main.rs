@@ -1,3 +1,5 @@
+use std::fmt::Result;
+
 // 
 /**
  * https://rust-cli.github.io/book/tutorial/cli-args.html
@@ -42,10 +44,14 @@ fn main() {
     //Resultは今回であればStringか、std::io::Error型を返す。
     // matchを使うことで対応できる。
     let result = std::fs::read_to_string("test.txt");
-    match result {
-        Ok(content) => {print!("File content: {}",content);}
-        Err(error) => {print!("Oh no:{}",error);}
-    }
+    //下記のように書く。
+    
+    let content = match result {
+        Ok(content) => {content},
+        Err(error) => {panic!("Oh no:{}",error);}
+    };
+    
+ 
 }
 
 /*
