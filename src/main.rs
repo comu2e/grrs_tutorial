@@ -13,7 +13,10 @@
 
 
 use structopt::StructOpt;
-
+// Box<dyn std::error::Error> 
+// Box:Errorトレイのいかなる型も含めることができる。
+//すべてのError型をBoxに入れることができる。
+// ？はResultの返り値として普段から使えることができる.
 fn main()-> Result<(),Box<dyn std::error::Error>> {
 
     let content = std::fs::read_to_string("test.xtx")?;
