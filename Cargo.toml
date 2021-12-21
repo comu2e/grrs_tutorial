@@ -9,3 +9,5 @@ edition = "2021"
 structopt = { version = "0.3", features = [ "paw" ] }
 failure = "0.1.5"
 exitfailure = "0.5.1"
+ansi_term = "0.12"
+
