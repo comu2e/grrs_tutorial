@@ -26,4 +26,6 @@ fn main(){
 # test
 
 # 動作方法
-```$ cargo run dep Cargo.toml```
+```$ cargo run print` src```
+
+![image](https://user-images.githubusercontent.com/5231283/146948034-76a985f1-5210-41da-9274-c7ebaee59df7.png)
