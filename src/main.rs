@@ -1,9 +1,22 @@
-use anyhow::{Context,Result};
+use structopt::StructOpt;
+use failure::ResultExt;
+use exitfailure::ExitFailure;
 
-// anyhowでエラーの状態をエラーメッセージに記載できるようにする。
-fn main() -> Result<()> {
-  let path = "test.txt";
-  let content = std::fs::read_to_string(path).with_context(|| format!("could not read file {}",path))?;
-  println!("file contetn:{}",content);
+#[derive(StructOpt)]
+struct Cli {
+  pattern : String,
+  #[structopt(parse(from_os_str))]
+  path:std::path::PathBuf,
+}
+
+fn main() -> Result<(),ExitFailure>{
+  let args = Cli::from_args();
+
+  let content = std::fs::read_to_string(&args.path).with_context(|_| format!("Could not read file :{:?}",&args.path ))?;
+  for line in content.lines(){
+    if line.contains(&args.pattern){
+      println!("{}",line);
+    }
+  }
   Ok(())
 }
